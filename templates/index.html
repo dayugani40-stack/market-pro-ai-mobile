@@ -72,5 +72,13 @@ function drawChart(){let c=$('candle'),w=c.clientWidth||600,h=c.clientHeight||40
   let yy=y(price);ctx.strokeStyle=color;ctx.lineWidth=1;ctx.setLineDash(dashed?[3,4]:[]);ctx.beginPath();ctx.moveTo(35,yy);ctx.lineTo(w-62,yy);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=color;ctx.font='bold 10px Segoe UI';ctx.fillText(label+' '+fmt(price),40,Math.max(14,yy-4));
  });
  }
+ <div style="margin:15px 0;">
+  <a href="/predictor"
+     style="display:inline-block;padding:12px 20px;
+     background:#16a34a;color:white;
+     text-decoration:none;border-radius:8px;">
+     PRO Candlestick AI
+  </a>
+</div>
  ctx.fillStyle='#8eabc8';ctx.fillText('Volume',40,h-55)}window.addEventListener('resize',drawChart);async function init(){setupAnalysisChecks();let r=await fetch('/api/upstox/status'),d=await r.json();$('connection').textContent=d.connected?'● Upstox Connected':'● Upstox Login Required';$('connection').style.color=d.connected?'#08e59a':'#ffcb63';changeMarket()}init();setInterval(()=>{if(document.visibilityState==='visible')refresh()},15000);setInterval(()=>{if(document.visibilityState==='visible'&&bars.length)fetchCandles(epoch)},60000);
 </script></body></html>
