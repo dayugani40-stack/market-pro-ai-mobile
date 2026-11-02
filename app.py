@@ -143,6 +143,11 @@ def summary():
  return jsonify(sheets=[{'name':name,'formulas':len(fs),'cells':len(cs)} for name,(fs,cs) in DATA.items()],total_formulas=sum(len(fs) for fs,_ in DATA.values()),limitations=['GOOGLEFINANCE and external feeds not evaluated','Shared formulas may be stored without an expanded expression','Complex Excel functions may show cached results'])
 @app.get('/')
 def home():return render_template('index.html',sheets=list(DATA),count=sum(len(x[0]) for x in DATA.values()))
+
+@app.get('/predictor')
+def pro_predictor():
+ return render_template('predictor.html', markets=INDIAN_MARKETS)
+
 @app.get('/api/formulas')
 def formulas():
  sheet=request.args.get('sheet','All');term=request.args.get('q','').lower().strip();page=max(1,int(request.args.get('page','1')));limit=100;rows=[]
